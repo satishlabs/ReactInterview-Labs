@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recursive Solution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recursive Solution</h1>
+    <p>This is a simple recursive solution to calculate the factorial of a number and collect IDs from a nested JSON.</p>
+    <pre id="output"></pre>
+
+    <script>
+        // Recursive factorial function
+        function factorial(n) {
+            if (n <= 1) {
+                return 1;
+            } else {
+                return n * factorial(n - 1);
+            }
+        }
+
+        // JSON tree
+        const tree = {
+            id: 1,
+            name: "Root",
+            children: [
+                {
+                    id: 2,
+                    name: "Child 1",
+                    children: [
+                        { id: 4, name: "Grandchild 1" },
+                        { id: 5, name: "Grandchild 2" }
+                    ]
+                },
+                { id: 3, name: "Child 2" }
+            ]
+        };
+
+        // Function to collect IDs recursively
+        function collectIds(node) {
+            let ids = [];
+
+            function traverse(current) {
+                if (!current) return;
+                ids.push(current.id);
+                if (current.children) {
+                    current.children.forEach(child => traverse(child));
+                }
+            }
+
+            traverse(node);
+            return ids;
+        }
+
+        // Output to browser
+        const output = document.getElementById("output");
+        output.textContent = 
+            "Factorial of 5: " + factorial(5) + "\n\n" +
+            "Collected IDs: " + collectIds(tree).join(", ");
+    </script>
+</body>
+</html>

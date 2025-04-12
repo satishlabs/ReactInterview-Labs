@@ -1,0 +1,29 @@
+/*
+Write down a function which will return the incrimented value starts from 0, by calling the function multiple times.
+
+You can achieve this using closures in JavaScript. A closure allows a function to "remember" the scope in which it was created — perfect for maintaining a counter.
+
+
+*/
+<html>
+<head>
+    <title>Increment Function Using Closure</title>
+    </style>
+    <body>
+        <script>
+             function createCounter(){
+            let count = 0; // private variable
+
+            return function(){
+                return count++;
+            }
+        }
+        const increment = createCounter(); // closure created
+        console.log(increment()); // 0
+        console.log(increment()); // 1
+        console.log(increment()); // 2 
+        console.log(increment()); // 3
+        </script>
+       
+    </body>
+</html>

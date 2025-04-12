@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Two-Way Binding Example</title>
+    </head>
+    <body>
+        <h2>Two-Way Binding (Vanilla JS)</h2>
+        <input type="text" id="input"/>
+        <p id="output"></p>
+
+        <script>
+            const model = {
+                text: ''
+            };
+
+            const input = document.getElementById('input');
+            const output = document.getElementById('output');
+
+            //Definfe a getter/setter for model.text using Object.defineProperty
+            Object.defineProperty(model, 'text', {
+                get: function() {
+                    return this._text;
+                },
+               set(value){
+                    this._text = value;
+                    input.value = value; // Update the input field  
+                    output.textContent = value; // Update the output paragraph
+                }
+               }
+            );
+
+            model.text = ''; // Initialize the model
+
+            //Listen for user input and update the model
+           input.addEventListener('input', (e) =>{
+                model.text = e.target.value; // Update the model when input changes
+            });
+
+            setTimeout(() =>{
+                model.text = 'Hello, Two-Way Binding!'; // Set initial value after 1 second
+            }, 3000);   
+            
+
+        </script>
+    </body>
+</html>
